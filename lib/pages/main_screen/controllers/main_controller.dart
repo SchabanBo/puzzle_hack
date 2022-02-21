@@ -12,6 +12,8 @@ class MainController extends GetxController {
   /// Glass settings
   int maxGlassPiece = 7;
   int animationDuration = 1000;
+  bool enableLowPerformanceMode = true;
+  bool useRomanNumerals = true;
 
   /// Shadows animation settings
   int boxesCount = 15;

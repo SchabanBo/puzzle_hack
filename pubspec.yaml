@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   get: ^4.6.1
-  shimmer_animation: ^2.1.0+1
   
 dev_dependencies:
   flutter_test:

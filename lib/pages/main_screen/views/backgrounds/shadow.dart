@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 
 import '../../../../helpers/random.dart';
 import '../../controllers/main_controller.dart';
+import '../puzzle/tile/effects/helpers.dart';
 
 class ShadowsBackground extends StatefulWidget {
   const ShadowsBackground({Key? key}) : super(key: key);
@@ -111,6 +112,7 @@ class _BoxBackgroundPainter extends CustomPainter {
       _boxes.removeLast();
     }
 
+    _moveLight(size);
     final lightRect =
         Rect.fromCircle(center: _light, radius: controller.lightRadius);
     final lightPaint = Paint()..shader = _shadowRect.createShader(lightRect);
@@ -128,6 +130,18 @@ class _BoxBackgroundPainter extends CustomPainter {
       box.rotate();
       box.collisionDetection(_boxes);
     }
+  }
+
+  void _moveLight(Size size) {
+    if (!isWebMobile) {
+      return;
+    }
+    _light = Offset(
+      _light.dx + random.nextDouble(),
+      _light.dy + random.nextDouble(),
+    );
+    if (_light.dx > size.width) _light = Offset(0, _light.dy);
+    if (_light.dy > size.height) _light = Offset(_light.dy, 0);
   }
 
   @override

@@ -59,7 +59,7 @@ class _PuzzleSettings extends GetView<PuzzleController> {
                     },
                     child: Container(
                       color: e == controller.puzzleSize
-                          ? Colors.red
+                          ? Colors.blue
                           : Colors.transparent,
                       padding: const EdgeInsets.symmetric(
                           vertical: 8, horizontal: 8),
@@ -78,6 +78,26 @@ class _GlassSettings extends GetView<MainController> {
   @override
   Widget build(BuildContext context) => Column(
         children: [
+          ObxValue<RxBool>(
+              (value) => CheckboxListTile(
+                    value: value.value,
+                    onChanged: (v) {
+                      value.value = v ?? true;
+                      controller.enableLowPerformanceMode = v ?? true;
+                    },
+                    title: const Text('Low Performance Mode'),
+                  ),
+              controller.enableLowPerformanceMode.obs),
+          ObxValue<RxBool>(
+              (value) => CheckboxListTile(
+                    value: value.value,
+                    onChanged: (v) {
+                      value.value = v ?? true;
+                      controller.useRomanNumerals = v ?? true;
+                    },
+                    title: const Text('Use Roman Numerals'),
+                  ),
+              controller.useRomanNumerals.obs),
           ObxValue<Rx<int>>(
               (v) => Column(
                     children: [
@@ -99,7 +119,7 @@ class _GlassSettings extends GetView<MainController> {
                           min: 100,
                           max: 4000,
                           label: v.toString(),
-                          activeColor: Colors.red,
+                          activeColor: Colors.blue,
                           thumbColor: Colors.white,
                           onChanged: (value) {
                             controller.animationDuration = value.toInt();
@@ -129,7 +149,7 @@ class _GlassSettings extends GetView<MainController> {
                           min: 1,
                           max: 20,
                           label: v.toString(),
-                          activeColor: Colors.red,
+                          activeColor: Colors.blue,
                           thumbColor: Colors.white,
                           onChanged: (value) {
                             controller.maxGlassPiece = value.toInt();
@@ -179,7 +199,7 @@ class _BackgroundSettings extends GetView<MainController> {
                         max: 8000,
                         label:
                             controller.backgroundAnimationDuration.toString(),
-                        activeColor: Colors.red,
+                        activeColor: Colors.blue,
                         thumbColor: Colors.white,
                         onChanged: (value) {
                           controller.backgroundAnimationDuration(value.toInt());
@@ -216,7 +236,7 @@ class _BackgroundSettings extends GetView<MainController> {
                               min: 10,
                               max: 50,
                               label: v.value.toString(),
-                              activeColor: Colors.red,
+                              activeColor: Colors.blue,
                               thumbColor: Colors.white,
                               onChanged: (value) {
                                 controller.boxesCount = value.toInt();
@@ -244,7 +264,7 @@ class _BackgroundSettings extends GetView<MainController> {
                               min: 10,
                               max: 300,
                               label: v.value.toString(),
-                              activeColor: Colors.red,
+                              activeColor: Colors.blue,
                               thumbColor: Colors.white,
                               onChanged: (value) {
                                 controller.boxSpeed = value.toInt();
@@ -272,7 +292,7 @@ class _BackgroundSettings extends GetView<MainController> {
                               min: 10,
                               max: 300,
                               label: v.value.toString(),
-                              activeColor: Colors.red,
+                              activeColor: Colors.blue,
                               thumbColor: Colors.white,
                               onChanged: (value) {
                                 controller.lightRadius = value;
@@ -300,7 +320,7 @@ class _BackgroundSettings extends GetView<MainController> {
                               min: 100,
                               max: 4000,
                               label: v.value.toString(),
-                              activeColor: Colors.red,
+                              activeColor: Colors.blue,
                               thumbColor: Colors.white,
                               onChanged: (value) {
                                 controller.shadowLength = value.toInt();
@@ -337,7 +357,7 @@ class _BackgroundSettings extends GetView<MainController> {
                               min: 1000,
                               max: 6000,
                               label: v.value.toString(),
-                              activeColor: Colors.red,
+                              activeColor: Colors.blue,
                               thumbColor: Colors.white,
                               onChanged: (value) {
                                 controller.planetsCount = value.toInt();
@@ -365,7 +385,7 @@ class _BackgroundSettings extends GetView<MainController> {
                               min: 10,
                               max: 200,
                               label: v.value.toString(),
-                              activeColor: Colors.red,
+                              activeColor: Colors.blue,
                               thumbColor: Colors.white,
                               onChanged: (value) {
                                 controller.starsCount = value.toInt();
@@ -393,7 +413,7 @@ class _BackgroundSettings extends GetView<MainController> {
                               min: 1,
                               max: 30,
                               label: v.value.toString(),
-                              activeColor: Colors.red,
+                              activeColor: Colors.blue,
                               thumbColor: Colors.white,
                               onChanged: (value) {
                                 controller.rotationVerticalSpeed =

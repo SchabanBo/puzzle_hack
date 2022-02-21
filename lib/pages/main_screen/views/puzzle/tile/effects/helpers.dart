@@ -1,9 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../helpers/random.dart';
 import '../../../../../../models/glass_piece.dart';
 import '../../../../controllers/main_controller.dart';
+
+final isWebMobile = kIsWeb &&
+    (defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.android);
 
 class BreakingLineGenerator {
   static const breakSpace = 1;
@@ -86,12 +91,14 @@ class GlassPieceClipper extends CustomClipper<Path> {
 
 class NumberPainter extends CustomPainter {
   final int value;
+  final controller = Get.find<MainController>();
   NumberPainter(this.value);
 
   @override
   void paint(Canvas canvas, Size size) {
     final textSpan = TextSpan(
-        text: _intToRoman(value),
+        text:
+            controller.useRomanNumerals ? _intToRoman(value) : value.toString(),
         style: TextStyle(
           fontSize: size.width * 0.4,
           color: Colors.white,

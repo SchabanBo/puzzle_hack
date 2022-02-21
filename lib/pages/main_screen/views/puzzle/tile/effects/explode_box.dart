@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../../../../../../helpers/random.dart';
+import '../../../../../../models/glass_piece.dart';
+import '../../../../controllers/main_controller.dart';
 import '../../../backgrounds/shadow.dart';
 import '../glass_widget.dart';
 import 'explodable_piece.dart';
@@ -76,8 +80,17 @@ class _ExplodeBoxState extends State<ExplodeBox> {
     });
 
     return LayoutBuilder(builder: ((context, constraints) {
-      if (MediaQuery.of(context).size.width < 600) {
-        return const SizedBox.shrink();
+      final child = glass(canAnimate: false);
+      if (isWebMobile && Get.find<MainController>().enableLowPerformanceMode) {
+        return ExplodablePiece(
+          child: child,
+          piece: GlassPiece(
+            const Line(Offset.zero, Offset.zero),
+            const Line(Offset.zero, Offset.zero),
+            Alignment(random.nextInt(3) - 1, random.nextInt(3) - 1),
+          ),
+          animationDuration: widget.animationDuration,
+        );
       }
       if (breakingPoint == Offset.zero) {
         breakingPoint =
@@ -87,18 +100,19 @@ class _ExplodeBoxState extends State<ExplodeBox> {
         breakingPoint!,
         Size(constraints.maxWidth, constraints.maxHeight),
       );
-      final child = glass(canAnimate: false);
       return Stack(
           children: lines
               .toPieces()
-              .map((e) => ExplodablePiece(
-                    piece: e,
-                    animationDuration: widget.animationDuration,
-                    child: ClipPath(
-                      clipper: GlassPieceClipper(e),
-                      child: child,
-                    ),
-                  ))
+              .map(
+                (e) => ExplodablePiece(
+                  piece: e,
+                  animationDuration: widget.animationDuration,
+                  child: ClipPath(
+                    clipper: GlassPieceClipper(e),
+                    child: child,
+                  ),
+                ),
+              )
               .toList());
     }));
   }
