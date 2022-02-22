@@ -105,7 +105,7 @@ class _GlassSettings extends GetView<MainController> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           const Text(
-                            'Explosion Animation Duration (ms)',
+                            'Tile Animation Duration (ms)',
                             style: _style,
                           ),
                           Text(
@@ -343,7 +343,7 @@ class _BackgroundSettings extends GetView<MainController> {
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
                               const Text(
-                                'Planets count',
+                                'Asteroids count',
                                 style: _style,
                               ),
                               Obx(() => Text(

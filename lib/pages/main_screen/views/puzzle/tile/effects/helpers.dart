@@ -6,9 +6,8 @@ import '../../../../../../helpers/random.dart';
 import '../../../../../../models/glass_piece.dart';
 import '../../../../controllers/main_controller.dart';
 
-final isWebMobile = kIsWeb &&
-    (defaultTargetPlatform == TargetPlatform.iOS ||
-        defaultTargetPlatform == TargetPlatform.android);
+final isMobile = defaultTargetPlatform == TargetPlatform.iOS ||
+    defaultTargetPlatform == TargetPlatform.android;
 
 class BreakingLineGenerator {
   static const breakSpace = 1;

@@ -18,12 +18,13 @@ class SidebarView extends GetResponsiveView<ScoreController> {
         children: [
           Row(
             mainAxisAlignment: axis == Axis.horizontal
-                ? MainAxisAlignment.spaceEvenly
+                ? MainAxisAlignment.center
                 : MainAxisAlignment.start,
             children: [
               axis == Axis.horizontal
                   ? settingsButton()
                   : const SizedBox.shrink(),
+              SizedBox(width: axis == Axis.horizontal ? 16 : 0),
               const Text(
                 'Puzzle Challenge',
                 style: TextStyle(
@@ -36,7 +37,7 @@ class SidebarView extends GetResponsiveView<ScoreController> {
           axis == Axis.vertical ? settingsButton() : const SizedBox.shrink(),
           axis == Axis.vertical
               ? Expanded(child: BackgroundSection())
-              : const SizedBox.shrink(),
+              : const SizedBox(height: 16),
           ScoreSection(),
         ],
       );

@@ -28,10 +28,12 @@ class _ShadowsBackgroundState extends State<ShadowsBackground> {
   }
 
   void _next() {
-    Future.delayed(Duration(milliseconds: painter.controller.boxSpeed), () {
+    try {
       painter.update();
-      _next();
-    });
+    } catch (e) {
+      // ignore
+    }
+    Timer(painter.controller.boxSpeed.milliseconds, _next);
   }
 
   @override
@@ -126,14 +128,14 @@ class _BoxBackgroundPainter extends CustomPainter {
   }
 
   void update() {
-    for (final box in _boxes) {
+    for (final box in List.from(_boxes)) {
       box.rotate();
       box.collisionDetection(_boxes);
     }
   }
 
   void _moveLight(Size size) {
-    if (!isWebMobile) {
+    if (!isMobile) {
       return;
     }
     _light = Offset(

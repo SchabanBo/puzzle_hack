@@ -81,7 +81,7 @@ class _ExplodeBoxState extends State<ExplodeBox> {
 
     return LayoutBuilder(builder: ((context, constraints) {
       final child = glass(canAnimate: false);
-      if (isWebMobile && Get.find<MainController>().enableLowPerformanceMode) {
+      if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
         return ExplodablePiece(
           child: child,
           piece: GlassPiece(

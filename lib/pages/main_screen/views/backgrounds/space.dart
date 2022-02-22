@@ -69,9 +69,11 @@ class _GalaxyBackgroundState extends State<GalaxyBackground> {
     if (painter._planets.length < _controller.planetsCount) {
       painter.addPlanet(_controller.planetsCount);
       painter.addPlanet(_controller.planetsCount);
-    } else if (painter._planets.length > _controller.planetsCount) {
-      painter._planets.removeLast();
-      painter._planets.removeLast();
+    } else if (painter._planets.length > _controller.planetsCount + 10) {
+      painter._planets.removeRange(
+        painter._planets.length - 8,
+        painter._planets.length,
+      );
     }
     if (painter._stars.length < _controller.starsCount) {
       painter.addStar();

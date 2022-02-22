@@ -24,7 +24,7 @@ class MainController extends GetxController {
   /// Space animation settings
   int planetsCount = 2000;
   int starsCount = 50;
-  int rotationVerticalSpeed = 10;
+  int rotationVerticalSpeed = 8;
 
   @override
   void onInit() {

@@ -59,7 +59,7 @@ class _ImplodeBoxState extends State<ImplodeBox> {
     if (!_isAnimating) return glass;
 
     return LayoutBuilder(builder: ((context, constraints) {
-      if (isWebMobile && Get.find<MainController>().enableLowPerformanceMode) {
+      if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
         return ExplodablePiece(
           child: glass,
           reverse: true,
