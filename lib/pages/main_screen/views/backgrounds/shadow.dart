@@ -152,14 +152,15 @@ class _BoxBackgroundPainter extends CustomPainter {
 
 // Source: https://codepen.io/mladen___/pen/gbvqBo
 class _Box {
-  int halfSize = (random.nextDouble() * 50).toInt();
+  int halfSize;
   double x;
   double y;
   double r = random.nextDouble() * pi;
   Color color = _colors[random.nextInt(_colors.length)];
   _Box(Size screen)
       : x = random.nextDouble() * screen.width,
-        y = random.nextDouble() * screen.height;
+        y = random.nextDouble() * screen.height,
+        halfSize = (random.nextDouble() * screen.shortestSide * 0.08).toInt();
 
   List<Offset> _getPoints() => [
         Offset(
@@ -240,8 +241,11 @@ class _Box {
       final dx = (x + halfSize) - (box.x + box.halfSize);
       final dy = (y + halfSize) - (box.y + box.halfSize);
       final d = sqrt(dx * dx + dy * dy);
-      if (d < halfSize + halfSize) {
+      if (box.halfSize < 5) {
         boxes.remove(box);
+      } else if (d < halfSize + halfSize) {
+        halfSize = halfSize > 1 ? halfSize -= 1 : 1;
+        box.halfSize = box.halfSize > 1 ? box.halfSize -= 1 : 1;
       }
     }
   }

@@ -40,17 +40,26 @@ class PuzzleView extends GetView<PuzzleController> {
       ),
     );
 
-    if (controller.isDone) {
-      return Column(children: [
-        const Text(
-          'YOU solved the puzzle!',
-          style: TextStyle(
-            fontSize: 40,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
+    if (controller.isComplete()) {
+      return Stack(children: [
+        puzzle,
+        const Center(
+          child: Text(
+            'YOU solved it!',
+            style: TextStyle(
+              fontSize: 40,
+              color: Colors.indigo,
+              shadows: [
+                Shadow(
+                  color: Colors.white,
+                  offset: Offset(2, 2),
+                  blurRadius: 2,
+                ),
+              ],
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        puzzle,
       ]);
     }
 

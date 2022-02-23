@@ -48,27 +48,35 @@ class _PuzzleSettings extends GetView<PuzzleController> {
   const _PuzzleSettings({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: sizes
-            .map((e) => Expanded(
-                  child: InkWell(
-                    onTap: () {
-                      Get.find<PuzzleController>().updateSize(e);
-                      Scaffold.of(context).openEndDrawer();
-                    },
-                    child: Container(
-                      color: e == controller.puzzleSize
-                          ? Colors.blue
-                          : Colors.transparent,
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 8, horizontal: 8),
-                      alignment: Alignment.center,
-                      child: Text(e.toString(), style: _style),
-                    ),
-                  ),
-                ))
-            .toList(),
+  Widget build(BuildContext context) => Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: sizes
+                .map((e) => Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          Get.find<PuzzleController>().updateSize(e);
+                          Scaffold.of(context).openEndDrawer();
+                        },
+                        child: Container(
+                          color: e == controller.puzzleSize
+                              ? Colors.blue
+                              : Colors.transparent,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 8, horizontal: 8),
+                          alignment: Alignment.center,
+                          child: Text(e.toString(), style: _style),
+                        ),
+                      ),
+                    ))
+                .toList(),
+          ),
+          TextButton(
+            onPressed: () => Get.find<PuzzleController>().solveIt(),
+            child: const Text('Solve It'),
+          ),
+        ],
       );
 }
 

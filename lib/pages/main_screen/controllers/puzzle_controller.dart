@@ -14,7 +14,7 @@ class PuzzleController extends GetxController {
   int puzzleSize = 4;
   bool _isUpdatingSize = false;
   final _scoreController = Get.find<ScoreController>();
-  bool isDone = false;
+  bool isDone1 = false;
   @override
   void onInit() {
     super.onInit();
@@ -39,6 +39,7 @@ class PuzzleController extends GetxController {
     puzzleSize = size;
     tiles.addAll(
         PuzzleGenerator().generate(size).map((e) => TileController(tile: e)));
+
     await _updateTilesState(TileState.onStart);
     _isUpdatingSize = false;
   }
@@ -63,11 +64,16 @@ class PuzzleController extends GetxController {
     return Future.delayed(Duration(milliseconds: duration));
   }
 
+  void solveIt() {
+    for (var item in tiles) {
+      item.currentValue(item.value);
+    }
+  }
+
   void shuffle() {
     final score = Get.find<ScoreController>();
     score.time(0);
     score.moves(0);
-    isDone = false;
     updateSize(puzzleSize);
   }
 
@@ -90,12 +96,7 @@ class PuzzleController extends GetxController {
   }
 
   /// Determines if the puzzle is completed.
-  void isComplete() {
-    if ((tiles.length - 1) - getNumberOfCorrectTiles() == 0) {
-      isDone = true;
-      tiles.clear();
-    }
-  }
+  bool isComplete() => getNumberOfCorrectTiles() == tiles.length - 1;
 
   /// Determines if the tapped tile can move in the direction of the whitespace
   /// tile.
