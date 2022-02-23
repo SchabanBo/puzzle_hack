@@ -1,15 +1,15 @@
 # Flutter Hack Challenge
 
 - [Flutter Hack Challenge](#flutter-hack-challenge)
-  - [Online Demo](#online-demo)
-  - [Puzzle Animation](#puzzle-animation)
-    - [Notes](#notes)
-  - [Background Animation](#background-animation)
-    - [Simple Background](#simple-background)
-    - [Shadows animation](#shadows-animation)
-    - [Space Animation](#space-animation)
-  - [Used packages](#used-packages)
-  - [Platforms](#platforms)
+  - [Online Demo](#online-demo)
+  - [Tile Animation](#tile-animation)
+    - [Notes](#notes)
+  - [Background Animation](#background-animation)
+    - [Simple Background](#simple-background)
+    - [Shadows animation](#shadows-animation)
+    - [Space Animation](#space-animation)
+  - [Used packages](#used-packages)
+  - [Platforms](#platforms)
 
 ## [Online Demo](https://schabanbo.github.io/puzzle_hack/#/)
 
