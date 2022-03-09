@@ -167,6 +167,7 @@ class _Planet {
   double cx, cy, x = 0, y = 0, z = random.nextDouble() * 2 + 1;
   double speed = pi / 720, step = 0, radius;
 
+  final _controller = Get.find<MainController>();
   double scale = random.nextBool() ? 1 : random.nextDouble() + .5;
   double scale1 = random.nextBool() ? 1 : random.nextDouble() + .5;
   _Planet({
@@ -177,10 +178,13 @@ class _Planet {
   });
 
   void update() {
-    x = radius * cos(step) * scale;
-    y = radius * sin(step);
-    y *= _yScale.scale;
-    step -= speed;
+    for (var i = 0; i < _controller.planetsSpeed.abs(); i++) {
+      final _step = step * (_controller.planetsSpeed > 0 ? 1 : -1);
+      x = (radius * cos(_step) * scale) * (_controller.spaceZoom / 100);
+      y = radius * sin(_step) * (_controller.spaceZoom / 100);
+      y *= _yScale.scale;
+      step -= speed;
+    }
   }
 
   final paint = Paint()
@@ -212,6 +216,7 @@ class ScaleChanger {
 class _Star {
   final double x, y;
   final double radius = random.nextDouble() * 10;
+  final _controller = Get.find<MainController>();
   Color color;
   bool isUp = true;
   _Star(this.x, this.y)
@@ -230,7 +235,13 @@ class _Star {
     if (color.alpha == 0 && !isUp) isUp = true;
     if (color.alpha == 255 && isUp) isUp = false;
 
-    color =
-        Color.fromARGB(isUp ? color.alpha + 1 : color.alpha - 1, 255, 255, 255);
+    color = Color.fromARGB(
+      isUp
+          ? color.alpha + _controller.startFadingSpeed
+          : color.alpha - _controller.startFadingSpeed,
+      255,
+      255,
+      255,
+    );
   }
 }

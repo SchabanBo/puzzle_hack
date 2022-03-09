@@ -14,7 +14,7 @@ class GlassWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (canAnimate) {
       return Obx(() => AnimatedContainer(
-            duration: Duration(milliseconds: random.nextInt(750)),
+            duration: Duration(milliseconds: random.nextInt(1000) + 500),
             margin: const EdgeInsets.all(8),
             decoration: _glassDecoration(Get.find<MainController>().background),
             child: child,
@@ -36,9 +36,12 @@ class GlassWidget extends StatelessWidget {
         );
       case BackgroundType.space:
         return BoxDecoration(
-          color: Colors.white10,
-          borderRadius: BorderRadius.circular(25),
-          border: Border.all(color: Colors.white),
+          color: Colors.white.withOpacity(.05),
+          borderRadius: BorderRadius.circular(15),
+          border: Border.all(
+            color: const Color(0xffffcc33).withOpacity(0.5),
+            width: 2,
+          ),
         );
       default:
         return BoxDecoration(

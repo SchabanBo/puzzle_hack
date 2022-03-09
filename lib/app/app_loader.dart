@@ -7,11 +7,15 @@ class AppLoader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => FutureBuilder(
-        future: puzzle_app.loadLibrary(),
+        future: _load(),
         builder: (c, s) => s.connectionState == ConnectionState.done
             ? puzzle_app.PuzzleApp()
             : const _SplashScreen(),
       );
+
+  Future<void> _load() async {
+    await puzzle_app.loadLibrary();
+  }
 }
 
 class _SplashScreen extends StatefulWidget {

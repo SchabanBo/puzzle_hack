@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../controllers/puzzle_controller.dart';
 import '../../controllers/score_controller.dart';
@@ -46,14 +47,19 @@ class SidebarView extends GetResponsiveView<ScoreController> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: const Icon(Icons.settings, color: Colors.white),
+            icon: Image.asset('assets/settings.png'),
             tooltip: 'Settings',
             onPressed: () => Scaffold.of(screen.context).openDrawer(),
           ),
           IconButton(
-            icon: const Icon(Icons.refresh, color: Colors.white),
+            icon: Image.asset('assets/refresh.png'),
             tooltip: 'Shuffle',
             onPressed: () => Get.find<PuzzleController>().shuffle(),
+          ),
+          IconButton(
+            icon: Image.asset('assets/github-icon.png'),
+            tooltip: 'Settings',
+            onPressed: () => launch('https://github.com/SchabanBo/puzzle_hack'),
           ),
         ],
       );

@@ -106,66 +106,20 @@ class _GlassSettings extends GetView<MainController> {
                     title: const Text('Use Roman Numerals'),
                   ),
               controller.useRomanNumerals.obs),
-          ObxValue<Rx<int>>(
-              (v) => Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Text(
-                            'Tile Animation Duration (ms)',
-                            style: _style,
-                          ),
-                          Text(
-                            v.toString(),
-                            style: _style,
-                          )
-                        ],
-                      ),
-                      Slider(
-                          value: v.toDouble(),
-                          min: 100,
-                          max: 4000,
-                          label: v.toString(),
-                          activeColor: Colors.blue,
-                          thumbColor: Colors.white,
-                          onChanged: (value) {
-                            controller.animationDuration = value.toInt();
-                            v(value.toInt());
-                          }),
-                    ],
-                  ),
-              controller.animationDuration.obs),
-          ObxValue<Rx<int>>(
-              (v) => Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Text(
-                            'Max Glass Piece Count',
-                            style: _style,
-                          ),
-                          Text(
-                            (v.value + 4).toString(),
-                            style: _style,
-                          )
-                        ],
-                      ),
-                      Slider(
-                          value: v.toDouble(),
-                          min: 1,
-                          max: 20,
-                          label: v.toString(),
-                          activeColor: Colors.blue,
-                          thumbColor: Colors.white,
-                          onChanged: (value) {
-                            controller.maxGlassPiece = value.toInt();
-                            v(value.toInt());
-                          }),
-                    ],
-                  ),
-              controller.maxGlassPiece.obs),
+          ValueChanger(
+            label: 'Tile Animation Duration (ms)',
+            min: 100,
+            max: 4000,
+            value: controller.animationDuration,
+            onChanged: (v) => controller.animationDuration = v,
+          ),
+          ValueChanger(
+            label: 'Max Glass Piece Count',
+            min: 5,
+            max: 20,
+            value: controller.maxGlassPiece,
+            onChanged: (v) => controller.maxGlassPiece = v,
+          ),
         ],
       );
 }
@@ -224,118 +178,34 @@ class _BackgroundSettings extends GetView<MainController> {
                   )),
               title: const Text('Shadows Animation'),
               children: [
-                ObxValue<RxInt>(
-                    (v) => Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                'Boxes Count',
-                                style: _style,
-                              ),
-                              Obx(() => Text(
-                                    v.value.toString(),
-                                    style: _style,
-                                  ))
-                            ],
-                          ),
-                          Slider(
-                              value: v.value.toDouble(),
-                              min: 10,
-                              max: 50,
-                              label: v.value.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                controller.boxesCount = value.toInt();
-                                v(value.toInt());
-                              })
-                        ]),
-                    controller.boxesCount.obs),
-                ObxValue<RxInt>(
-                    (v) => Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                'Box Speed (ms)',
-                                style: _style,
-                              ),
-                              Obx(() => Text(
-                                    v.value.toString(),
-                                    style: _style,
-                                  ))
-                            ],
-                          ),
-                          Slider(
-                              value: v.value.toDouble(),
-                              min: 10,
-                              max: 300,
-                              label: v.value.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                controller.boxSpeed = value.toInt();
-                                v(value.toInt());
-                              })
-                        ]),
-                    controller.boxSpeed.obs),
-                ObxValue<RxDouble>(
-                    (v) => Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                'Light radius',
-                                style: _style,
-                              ),
-                              Obx(() => Text(
-                                    v.value.toInt().toString(),
-                                    style: _style,
-                                  ))
-                            ],
-                          ),
-                          Slider(
-                              value: v.value,
-                              min: 10,
-                              max: 300,
-                              label: v.value.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                controller.lightRadius = value;
-                                v(value);
-                              })
-                        ]),
-                    controller.lightRadius.obs),
-                ObxValue<RxInt>(
-                    (v) => Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                'Shadow length',
-                                style: _style,
-                              ),
-                              Obx(() => Text(
-                                    v.value.toString(),
-                                    style: _style,
-                                  ))
-                            ],
-                          ),
-                          Slider(
-                              value: v.value.toDouble(),
-                              min: 100,
-                              max: 4000,
-                              label: v.value.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                controller.shadowLength = value.toInt();
-                                v(value.toInt());
-                              })
-                        ]),
-                    controller.shadowLength.obs),
+                ValueChanger(
+                  label: 'Boxes Count',
+                  value: controller.boxesCount,
+                  min: 10,
+                  max: 50,
+                  onChanged: (v) => controller.boxesCount = v,
+                ),
+                ValueChanger(
+                  label: 'Box Speed (ms)',
+                  value: controller.boxSpeed,
+                  min: 10,
+                  max: 300,
+                  onChanged: (v) => controller.boxSpeed = v,
+                ),
+                ValueChanger(
+                  label: 'Light radius',
+                  value: controller.lightRadius,
+                  min: 10,
+                  max: 300,
+                  onChanged: (v) => controller.lightRadius = v,
+                ),
+                ValueChanger(
+                  label: 'Shadow length',
+                  value: controller.shadowLength,
+                  min: 100,
+                  max: 4000,
+                  onChanged: (v) => controller.shadowLength = v,
+                ),
               ]),
           ExpansionTile(
               leading: Obx(() => Checkbox(
@@ -345,92 +215,94 @@ class _BackgroundSettings extends GetView<MainController> {
                   )),
               title: const Text('Space Animation'),
               children: [
-                ObxValue<RxInt>(
-                    (v) => Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                'Asteroids count',
-                                style: _style,
-                              ),
-                              Obx(() => Text(
-                                    v.value.toString(),
-                                    style: _style,
-                                  ))
-                            ],
-                          ),
-                          Slider(
-                              value: v.value.toDouble(),
-                              min: 1000,
-                              max: 6000,
-                              label: v.value.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                controller.planetsCount = value.toInt();
-                                v(value.toInt());
-                              })
-                        ]),
-                    controller.planetsCount.obs),
-                ObxValue<RxInt>(
-                    (v) => Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                'Stars count',
-                                style: _style,
-                              ),
-                              Obx(() => Text(
-                                    v.value.toString(),
-                                    style: _style,
-                                  ))
-                            ],
-                          ),
-                          Slider(
-                              value: v.value.toDouble(),
-                              min: 10,
-                              max: 200,
-                              label: v.value.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                controller.starsCount = value.toInt();
-                                v(value.toInt());
-                              })
-                        ]),
-                    controller.starsCount.obs),
-                ObxValue<RxInt>(
-                    (v) => Column(children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              const Text(
-                                'Vertical rotation speed',
-                                style: _style,
-                              ),
-                              Obx(() => Text(
-                                    v.value.toString(),
-                                    style: _style,
-                                  ))
-                            ],
-                          ),
-                          Slider(
-                              value: v.value.toDouble(),
-                              min: 1,
-                              max: 30,
-                              label: v.value.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                controller.rotationVerticalSpeed =
-                                    value.toInt();
-                                v(value.toInt());
-                              })
-                        ]),
-                    controller.rotationVerticalSpeed.obs),
+                ValueChanger(
+                  label: 'Asteroids count',
+                  min: 1000,
+                  max: 6000,
+                  value: controller.planetsCount,
+                  onChanged: (v) => controller.planetsCount = v,
+                ),
+                ValueChanger(
+                  label: 'Asteroids speed',
+                  min: -50,
+                  max: 50,
+                  value: controller.planetsSpeed,
+                  onChanged: (v) => controller.planetsSpeed = v,
+                ),
+                ValueChanger(
+                  label: 'Zoom %',
+                  min: 1,
+                  max: 1000,
+                  value: controller.spaceZoom,
+                  onChanged: (v) => controller.spaceZoom = v,
+                ),
+                ValueChanger(
+                  label: 'Stars count',
+                  value: controller.starsCount,
+                  min: 10,
+                  max: 200,
+                  onChanged: (v) => controller.starsCount = v,
+                ),
+                ValueChanger(
+                    label: 'Start fading speed',
+                    value: controller.startFadingSpeed,
+                    min: 0,
+                    max: 30,
+                    onChanged: (v) => controller.startFadingSpeed = v),
+                ValueChanger(
+                  label: 'Vertical rotation speed',
+                  min: 1,
+                  max: 100,
+                  value: controller.rotationVerticalSpeed,
+                  onChanged: (v) => controller.rotationVerticalSpeed = v,
+                )
               ]),
         ],
       );
+}
+
+class ValueChanger extends StatelessWidget {
+  final ValueChanged<int> onChanged;
+  final String label;
+  final int value;
+  final int min;
+  final int max;
+
+  const ValueChanger({
+    required this.label,
+    required this.min,
+    required this.max,
+    required this.value,
+    required this.onChanged,
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ObxValue<RxInt>(
+        (v) => Column(children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(label, style: _style),
+                  Obx(() => Text(
+                        v.value.toString(),
+                        style: _style,
+                      ))
+                ],
+              ),
+              Slider(
+                  value: v.value.toDouble(),
+                  min: min.toDouble(),
+                  max: max.toDouble(),
+                  label: v.value.toString(),
+                  activeColor: Colors.blue,
+                  thumbColor: Colors.white,
+                  onChanged: (value) {
+                    onChanged(value.toInt());
+                    v(value.toInt());
+                  })
+            ]),
+        value.obs);
+  }
 }

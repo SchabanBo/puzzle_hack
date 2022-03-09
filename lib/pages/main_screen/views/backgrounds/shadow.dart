@@ -98,7 +98,7 @@ class _BoxBackgroundPainter extends CustomPainter {
       Color(0xff52689a),
       _backgroundColor,
     ],
-    stops: [0, 0.1, 1.0],
+    stops: [0, 0.05, 1.0],
   );
   final _shadowPaint = Paint()
     ..color = const Color(0xff061126)
@@ -115,8 +115,8 @@ class _BoxBackgroundPainter extends CustomPainter {
     }
 
     _moveLight(size);
-    final lightRect =
-        Rect.fromCircle(center: _light, radius: controller.lightRadius);
+    final lightRect = Rect.fromCircle(
+        center: _light, radius: controller.lightRadius.toDouble());
     final lightPaint = Paint()..shader = _shadowRect.createShader(lightRect);
     canvas.drawRect(lightRect, lightPaint);
     for (final box in _boxes) {

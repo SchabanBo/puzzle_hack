@@ -64,10 +64,17 @@ class PuzzleController extends GetxController {
     return Future.delayed(Duration(milliseconds: duration));
   }
 
-  void solveIt() {
+  void solveIt() async {
+    await _updateTilesState(TileState.onEnd);
     for (var item in tiles) {
       item.currentValue(item.value);
+      item.isWhitespace = false;
     }
+    tiles.sort((a, b) => a.currentValue.value.compareTo(b.currentValue.value));
+    tiles.last.isWhitespace = true;
+    tiles.last.state(TileState.whitespace);
+
+    await _updateTilesState(TileState.onStart);
   }
 
   void shuffle() {
@@ -101,6 +108,9 @@ class PuzzleController extends GetxController {
   /// Determines if the tapped tile can move in the direction of the whitespace
   /// tile.
   bool isTileMovable(TileController tile) {
+    if (isComplete()) {
+      return false;
+    }
     final whitespaceTile = getWhitespaceTile();
     if (tile == whitespaceTile) {
       return false;

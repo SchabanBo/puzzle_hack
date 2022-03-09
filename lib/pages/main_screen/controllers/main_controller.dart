@@ -1,3 +1,5 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import 'puzzle_controller.dart';
@@ -18,19 +20,30 @@ class MainController extends GetxController {
   /// Shadows animation settings
   int boxesCount = 15;
   int boxSpeed = 50;
-  double lightRadius = 200;
+  int lightRadius = 200;
   int shadowLength = 3000;
 
   /// Space animation settings
   int planetsCount = 2000;
+  int planetsSpeed = 1;
+  int spaceZoom = 100;
   int starsCount = 50;
-  int rotationVerticalSpeed = 8;
+  int rotationVerticalSpeed = 5;
+  int startFadingSpeed = 1;
 
   @override
   void onInit() {
-    Get.lazyPut(PuzzleController.new);
-    Get.lazyPut(ScoreController.new);
+    Get.lazyPut(() => PuzzleController());
+    Get.lazyPut(() => ScoreController());
     super.onInit();
+    if (kIsWeb) {
+      background.listen((p0) {
+        debugPrint('Background changed to $p0');
+        FirebaseAnalytics.instance.logEvent(
+          name: 'background: ${p0.toString()}',
+        );
+      });
+    }
   }
 
   void drawerChanged(bool value) {
