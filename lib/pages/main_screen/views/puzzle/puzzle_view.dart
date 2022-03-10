@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import '../../../../helpers/extensions/list_extensions.dart';
@@ -16,11 +17,11 @@ class PuzzleView extends GetView<PuzzleController> {
         padding: const EdgeInsets.all(16.0),
         child: AspectRatio(
           aspectRatio: 1,
-          child: Obx(builder),
+          child: Obx(() => builder(context)),
         ),
       ));
 
-  Widget builder() {
+  Widget builder(BuildContext context) {
     if (controller.tiles.isEmpty) {
       return const SizedBox.shrink();
     }
@@ -29,7 +30,15 @@ class PuzzleView extends GetView<PuzzleController> {
       key: const ValueKey('puzzle'),
       autofocus: true,
       focusNode: controller.focusNode,
-      onKeyEvent: (k) => controller.onKey(k),
+      onKeyEvent: (k) {
+        if (k.logicalKey == LogicalKeyboardKey.space) {
+          final scaffold = Scaffold.of(context);
+          scaffold.openDrawer();
+          return;
+        }
+        controller.onKey(k);
+        FocusScope.of(context).requestFocus(controller.focusNode);
+      },
       child: Table(
         children: controller.tiles
             .map(_buildTile)

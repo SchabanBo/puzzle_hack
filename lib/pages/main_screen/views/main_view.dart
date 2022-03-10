@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../controllers/main_controller.dart';
+import '../controllers/puzzle_controller.dart';
 import 'backgrounds/background.dart';
 import 'puzzle/puzzle_view.dart';
 import 'sidebar/constants.dart';
@@ -20,7 +21,13 @@ class MainScreen extends StatelessWidget {
             child: SettingsSection(),
           ),
           drawerScrimColor: Colors.transparent,
-          onDrawerChanged: c.drawerChanged,
+          onDrawerChanged: (v) {
+            if (!v) {
+              final con = Get.find<PuzzleController>();
+              con.tiles.refresh();
+              FocusScope.of(context).requestFocus(con.focusNode);
+            }
+          },
           backgroundColor: Colors.black,
           body: Stack(
             children: [

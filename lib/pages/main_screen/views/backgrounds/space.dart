@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -53,7 +54,7 @@ class _GalaxyBackgroundState extends State<GalaxyBackground> {
   late Timer _timer2;
   final painter = _GalaxyPainter();
   final _controller = Get.find<MainController>();
-
+  bool _canEdit = false;
   @override
   void initState() {
     super.initState();
@@ -96,17 +97,34 @@ class _GalaxyBackgroundState extends State<GalaxyBackground> {
   void dispose() {
     _timer.cancel();
     _timer2.cancel();
-    _yScale._scale = .5;
+    _yScale.scale = .5;
     _yScale.direction = -1;
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(
-        key: ValueKey(random.nextDouble()),
-        size: Size.infinite,
-        painter: painter);
+    return Listener(
+      onPointerDown: (_) => _canEdit = true,
+      onPointerUp: (_) => _canEdit = false,
+      onPointerMove: (event) {
+        if (_canEdit) {
+          _yScale.scale += event.delta.dy / 1000;
+          if (_controller.planetsCount > 0 || event.delta.dx > 0) {
+            _controller.planetsCount += event.delta.dx.toInt();
+          }
+        }
+      },
+      onPointerSignal: (pointerSignal) {
+        if (pointerSignal is PointerScrollEvent) {
+          _controller.spaceZoom += pointerSignal.scrollDelta.dy.toInt();
+        }
+      },
+      child: CustomPaint(
+          key: ValueKey(random.nextDouble()),
+          size: Size.infinite,
+          painter: painter),
+    );
   }
 }
 
@@ -197,11 +215,9 @@ class _Planet {
 
 class ScaleChanger {
   final _controller = Get.find<MainController>();
-  double _scale = .5;
+  double scale = .5;
 
   double direction = -1;
-
-  double get scale => _scale;
 
   void update() {
     direction = scale >= .8
@@ -209,7 +225,7 @@ class ScaleChanger {
         : scale <= -.5
             ? 1
             : direction;
-    _scale += direction * (_controller.rotationVerticalSpeed / 10000);
+    scale += direction * (_controller.rotationVerticalSpeed / 10000);
   }
 }
 

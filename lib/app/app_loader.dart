@@ -26,33 +26,17 @@ class _SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<_SplashScreen> {
-  bool _visible = true;
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (mounted) {
-        setState(() => _visible = false);
-      }
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Scaffold(
         body: Center(
-          child: AnimatedOpacity(
-            opacity: _visible ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 1000),
-            child: const FlutterLogo(size: double.infinity),
-            onEnd: () {
-              setState(() {
-                _visible = !_visible;
-              });
-            },
-          ),
+          child: FlutterLogo(size: double.infinity),
         ),
       ),
     );

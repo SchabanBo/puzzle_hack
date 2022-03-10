@@ -23,7 +23,10 @@ class _FadingTileState extends State<FadingTile> with TickerProviderStateMixin {
   late final Animation<double> _animation = Tween<double>(
     begin: widget.reverse ? 0 : 1.0,
     end: widget.reverse ? 1.0 : 0,
-  ).animate(_controller);
+  ).animate(CurvedAnimation(
+    parent: _controller,
+    curve: Curves.easeInOutBack,
+  ));
 
   @override
   void initState() {

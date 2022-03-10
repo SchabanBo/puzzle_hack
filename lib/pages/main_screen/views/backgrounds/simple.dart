@@ -26,7 +26,7 @@ class _SimpleBackgroundState extends State<SimpleBackground> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       _update();
     });
   }

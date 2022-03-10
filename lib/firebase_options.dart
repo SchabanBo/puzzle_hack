@@ -22,7 +22,10 @@ class DefaultFirebaseOptions {
     // ignore: missing_enum_constant_in_switch
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        return android;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -48,13 +51,5 @@ class DefaultFirebaseOptions {
     authDomain: 'flutterhack-e6d80.firebaseapp.com',
     storageBucket: 'flutterhack-e6d80.appspot.com',
     measurementId: 'G-8VT3MT2RVM',
-  );
-
-  static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCyuXp_U4STAXFaJmCmR6pHUdMYExn-1d0',
-    appId: '1:883838945741:android:1b682473a009ff37ad1c84',
-    messagingSenderId: '883838945741',
-    projectId: 'flutterhack-e6d80',
-    storageBucket: 'flutterhack-e6d80.appspot.com',
   );
 }

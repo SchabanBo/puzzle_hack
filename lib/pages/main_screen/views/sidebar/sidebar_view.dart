@@ -35,7 +35,15 @@ class SidebarView extends GetResponsiveView<ScoreController> {
               ),
             ],
           ),
-          axis == Axis.vertical ? settingsButton() : const SizedBox.shrink(),
+          if (axis == Axis.vertical)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 4),
+              child: Text(
+                'Move with arrows or Space for settings',
+                style: TextStyle(color: Colors.white, fontSize: 12),
+              ),
+            ),
+          if (axis == Axis.vertical) settingsButton(),
           axis == Axis.vertical
               ? Expanded(child: BackgroundSection())
               : const SizedBox(height: 16),
@@ -47,12 +55,12 @@ class SidebarView extends GetResponsiveView<ScoreController> {
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
-            icon: Image.asset('assets/settings.png'),
+            icon: const Icon(Icons.settings, color: Colors.white),
             tooltip: 'Settings',
             onPressed: () => Scaffold.of(screen.context).openDrawer(),
           ),
           IconButton(
-            icon: Image.asset('assets/refresh.png'),
+            icon: const Icon(Icons.refresh, color: Colors.white),
             tooltip: 'Shuffle',
             onPressed: () => Get.find<PuzzleController>().shuffle(),
           ),

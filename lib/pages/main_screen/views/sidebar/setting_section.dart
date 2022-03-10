@@ -17,9 +17,10 @@ class SettingsSection extends GetView<MainController> {
             Text(
               'Settings',
               style: TextStyle(
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             SizedBox(height: 10),
             Text('Puzzle Size',
@@ -138,6 +139,8 @@ class _BackgroundSettings extends GetView<MainController> {
                         controller.background(BackgroundType.simple),
                   )),
               title: const Text('Simple Animation'),
+              initiallyExpanded:
+                  controller.background.value == BackgroundType.simple,
               children: [
                 Column(
                   children: [
@@ -177,6 +180,8 @@ class _BackgroundSettings extends GetView<MainController> {
                         controller.background(BackgroundType.shadows),
                   )),
               title: const Text('Shadows Animation'),
+              initiallyExpanded:
+                  controller.background.value == BackgroundType.shadows,
               children: [
                 ValueChanger(
                   label: 'Boxes Count',
@@ -214,6 +219,8 @@ class _BackgroundSettings extends GetView<MainController> {
                         controller.background(BackgroundType.space),
                   )),
               title: const Text('Space Animation'),
+              initiallyExpanded:
+                  controller.background.value == BackgroundType.space,
               children: [
                 ValueChanger(
                   label: 'Asteroids count',
@@ -292,7 +299,12 @@ class ValueChanger extends StatelessWidget {
                 ],
               ),
               Slider(
-                  value: v.value.toDouble(),
+                  value: (v.value > max
+                          ? max
+                          : v.value < min
+                              ? min
+                              : v.value)
+                      .toDouble(),
                   min: min.toDouble(),
                   max: max.toDouble(),
                   label: v.value.toString(),

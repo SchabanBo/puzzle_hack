@@ -14,7 +14,8 @@ class GlassWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     if (canAnimate) {
       return Obx(() => AnimatedContainer(
-            duration: Duration(milliseconds: random.nextInt(1000) + 500),
+            duration: Duration(milliseconds: random.nextInt(1000) + 600),
+            curve: Curves.slowMiddle,
             margin: const EdgeInsets.all(8),
             decoration: _glassDecoration(Get.find<MainController>().background),
             child: child,

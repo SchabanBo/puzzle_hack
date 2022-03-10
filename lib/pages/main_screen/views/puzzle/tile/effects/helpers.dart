@@ -30,7 +30,8 @@ class BreakingLineGenerator {
 
   List<double> points(int max, {bool reverse = false}) {
     final points = <double>[];
-    for (var i = 0; i < random.nextInt(mainController.maxGlassPiece); i++) {
+    final count = (mainController.maxGlassPiece - 4) ~/ 4;
+    for (var i = 0; i < count; i++) {
       points.add(random.nextInt(max).toDouble());
     }
     points.sort();

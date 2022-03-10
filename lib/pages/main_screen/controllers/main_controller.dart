@@ -45,12 +45,6 @@ class MainController extends GetxController {
       });
     }
   }
-
-  void drawerChanged(bool value) {
-    if (value == false) {
-      Get.find<PuzzleController>().tiles.refresh();
-    }
-  }
 }
 
 enum BackgroundType {

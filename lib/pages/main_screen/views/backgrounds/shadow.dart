@@ -210,8 +210,8 @@ class _Box {
   void rotate() {
     var speed = (60 - halfSize) / 20;
     r += speed * 0.002;
-    x += speed;
-    y += speed;
+    x += speed.abs();
+    y += speed.abs();
   }
 
   void drawShadow(Canvas canves, Offset light, Paint paint, int _shadowLength) {

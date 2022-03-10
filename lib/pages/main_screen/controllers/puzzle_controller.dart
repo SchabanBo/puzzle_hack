@@ -14,7 +14,7 @@ class PuzzleController extends GetxController {
   int puzzleSize = 4;
   bool _isUpdatingSize = false;
   final _scoreController = Get.find<ScoreController>();
-  bool isDone1 = false;
+  bool isMoving = false;
   @override
   void onInit() {
     super.onInit();
@@ -142,7 +142,7 @@ class PuzzleController extends GetxController {
 
   void onKey(KeyEvent event) {
     if (kDebugMode) print('Key: ${event.logicalKey.debugName}');
-
+    if (isMoving) return;
     final whiteSpaceTile = getWhitespaceTile();
     var position = whiteSpaceTile.position;
     if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
@@ -156,9 +156,11 @@ class PuzzleController extends GetxController {
     } else {
       return;
     }
+    isMoving = true;
     if (!_validPosition(position)) return;
     final targetTile = tiles.singleWhere((tile) => tile.position == position);
     targetTile.explode.explode();
+    isMoving = false;
   }
 
   bool _validPosition(Position position) =>

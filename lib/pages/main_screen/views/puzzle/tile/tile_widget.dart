@@ -15,9 +15,10 @@ class TileWidget extends StatelessWidget {
   TileWidget(this.controller, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Obx(_build);
+  Widget build(BuildContext context) => Obx(() => _build(context));
 
-  Widget _build() {
+  Widget _build(BuildContext context) {
+    FocusScope.of(context).requestFocus(puzzleController.focusNode);
     switch (controller.state.value) {
       case TileState.readyToExplode:
         return Container(

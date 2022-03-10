@@ -10,7 +10,14 @@ class Background extends GetView<MainController> {
   const Background({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Obx(builder);
+  Widget build(BuildContext context) => Obx(
+        () => AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          switchInCurve: Curves.easeIn,
+          switchOutCurve: Curves.easeOut,
+          child: builder(),
+        ),
+      );
 
   Widget builder() {
     switch (controller.background.value) {
