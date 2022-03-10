@@ -17,7 +17,7 @@
 
 The main animation for the tiles moving in the puzzle is Explode-implode animation, where the tile will break at the point where the user clicks (or taps). And from this point multiple breaking lines for this tile will be generated (The number of the lines is adjustable in the settings) and then the tile will be converted to many pieces, and they will preform an explosion animation. And after the explosion is finished the a number of pieces will be generated and perfume an imploded animation to shape at the end the new tile in the new position (The explosion and implode animation duration is adjustable in the settings).
 
-![Tile Animation](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Explode.PNG)
+![Tile Animation](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Explode.PNG?raw=true)
 
 ### Notes
 
@@ -35,7 +35,7 @@ There are three types of backgrounds in the app. On wide screen the background c
 
 Just simple colorful background, the speed of the animation could be changed from the settings.
 
-![Simple Background](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Background_Simple.PNG)
+![Simple Background](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Background_Simple.PNG?raw=true)
 
 ### Shadows animation
 
@@ -48,7 +48,7 @@ Those properties are adjustable in the settings:
 - The light radius
 - The length of the box shadow
 
-![ Shadows animation](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Background_Shadows.PNG)
+![ Shadows animation](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Background_Shadows.PNG?raw=true)
 
 ### Space Animation
 
@@ -70,7 +70,7 @@ Those properties are adjustable in the settings:
 - The stars fading speed.
 - The vertical rotation speed.
 
-![ Space animation](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Background_Space.PNG)
+![ Space animation](https://github.com/SchabanBo/puzzle_hack/tree/master/Screenshots/Background_Space.PNG?raw=true)
 
 ## Used packages
 
