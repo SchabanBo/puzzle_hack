@@ -8,6 +8,7 @@ import '../../../backgrounds/shadow.dart';
 import '../glass_widget.dart';
 import 'explodable_piece.dart';
 import 'helpers.dart';
+import 'slidable_piece.dart';
 
 class ExplodeBox extends StatefulWidget {
   final int value;
@@ -15,10 +16,12 @@ class ExplodeBox extends StatefulWidget {
   final VoidCallback onEnd;
   final ExplodeNotifier explode;
   final bool Function() canBreak;
+  final Alignment direction;
   final int animationDuration;
   const ExplodeBox({
     required this.value,
     required this.animationDuration,
+    required this.direction,
     required this.explode,
     required this.canBreak,
     required this.onTap,
@@ -31,6 +34,7 @@ class ExplodeBox extends StatefulWidget {
 }
 
 class _ExplodeBoxState extends State<ExplodeBox> {
+  final MainController _mainController = Get.find();
   Offset? breakingPoint;
   @override
   void initState() {
@@ -80,7 +84,7 @@ class _ExplodeBoxState extends State<ExplodeBox> {
     });
 
     return LayoutBuilder(builder: ((context, constraints) {
-      final child = glass(canAnimate: false);
+      final glassChild = glass(canAnimate: false);
       if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
         return ExplodablePiece(
           child: child,
@@ -101,20 +105,31 @@ class _ExplodeBoxState extends State<ExplodeBox> {
         Size(constraints.maxWidth, constraints.maxHeight),
       );
       return Stack(
-          children: lines
-              .toPieces()
-              .map(
-                (e) => ExplodablePiece(
-                  piece: e,
-                  animationDuration: widget.animationDuration,
-                  child: ClipPath(
-                    clipper: GlassPieceClipper(e),
-                    child: child,
-                  ),
-                ),
-              )
-              .toList());
+          children:
+              lines.toPieces().map((e) => getPiece(e, glassChild)).toList());
     }));
+  }
+
+  Widget getPiece(GlassPiece piece, Widget glassChild) {
+    if (_mainController.isSlidable) {
+      return SlidablePiece(
+        direction: widget.direction,
+        piece: piece,
+        animationDuration: widget.animationDuration,
+        child: ClipPath(
+          clipper: GlassPieceClipper(piece),
+          child: glassChild,
+        ),
+      );
+    }
+    return ExplodablePiece(
+      piece: piece,
+      animationDuration: widget.animationDuration,
+      child: ClipPath(
+        clipper: GlassPieceClipper(piece),
+        child: glassChild,
+      ),
+    );
   }
 
   Widget glass({bool canAnimate = true}) => GlassWidget(

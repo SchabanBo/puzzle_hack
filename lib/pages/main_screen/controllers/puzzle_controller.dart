@@ -168,4 +168,18 @@ class PuzzleController extends GetxController {
       position.x <= puzzleSize &&
       position.y > 0 &&
       position.y <= puzzleSize;
+
+  Alignment getDirection(TileController tile, {TileController? whitespace}) {
+    whitespace ??= getWhitespaceTile();
+    if (tile.position.x == whitespace.position.x) {
+      return tile.position.y > whitespace.position.y
+          ? Alignment.topCenter
+          : Alignment.bottomCenter;
+    } else if (tile.position.y == whitespace.position.y) {
+      return tile.position.x > whitespace.position.x
+          ? Alignment.centerLeft
+          : Alignment.centerRight;
+    }
+    return Alignment.center;
+  }
 }
