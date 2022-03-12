@@ -86,13 +86,15 @@ class _ExplodeBoxState extends State<ExplodeBox> {
     return LayoutBuilder(builder: ((context, constraints) {
       final glassChild = glass(canAnimate: false);
       if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
-        return getPiece(
-          GlassPiece(
+        return SlidablePiece(
+          piece: GlassPiece(
             const Line(Offset.zero, Offset.zero),
             const Line(Offset.zero, Offset.zero),
             Alignment(random.nextInt(3) - 1, random.nextInt(3) - 1),
           ),
-          glassChild,
+          direction: widget.direction,
+          animationDuration: widget.animationDuration,
+          child: glassChild,
         );
       }
       if (breakingPoint == Offset.zero) {
