@@ -44,8 +44,11 @@ class BreakingLineGenerator {
   List<GlassPiece> toPieces() {
     final pieces = <GlassPiece>[];
     for (var i = 0; i < _lines.length - 1; i++) {
-      pieces.add(
-          GlassPiece(_lines[i], _lines[i + 1], _alignment(_lines[i].start)));
+      pieces.add(GlassPiece(
+        _lines[i],
+        _lines[i + 1],
+        _alignment(_lines[i].start),
+      ));
     }
     return pieces;
   }

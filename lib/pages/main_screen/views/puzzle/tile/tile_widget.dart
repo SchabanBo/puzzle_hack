@@ -27,6 +27,7 @@ class TileWidget extends StatelessWidget {
               : null,
           child: ExplodeBox(
             value: controller.currentValue.value,
+            direction: puzzleController.getDirection(controller),
             animationDuration: mainController.animationDuration,
             explode: controller.explode,
             canBreak: () => puzzleController.isTileMovable(controller),

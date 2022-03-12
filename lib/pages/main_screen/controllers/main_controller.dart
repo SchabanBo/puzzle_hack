@@ -11,8 +11,11 @@ class MainController extends GetxController {
   /// Simple animation settings
   final backgroundAnimationDuration = 5000.obs;
 
+  // Tile settings
+  bool isSlidable = true;
+
   /// Glass settings
-  int maxGlassPiece = 7;
+  int maxGlassPiece = 15;
   int animationDuration = 1000;
   bool enableLowPerformanceMode = true;
   bool useRomanNumerals = true;
