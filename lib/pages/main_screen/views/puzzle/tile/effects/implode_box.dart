@@ -13,10 +13,8 @@ class ImplodeBox extends StatefulWidget {
   final int value;
   final VoidCallback onEnd;
   final int animationDuration;
-  final Alignment direction;
   const ImplodeBox(
     this.value,
-    this.direction,
     this.animationDuration,
     this.onEnd, {
     Key? key,
@@ -90,10 +88,13 @@ class _ImplodeBoxState extends State<ImplodeBox> {
   Widget getPiece(GlassPiece piece, Widget childGlass) {
     if (_mainController.isSlidable) {
       return SlidablePiece(
-        child: childGlass,
+        child: ClipPath(
+          clipper: GlassPieceClipper(piece),
+          child: childGlass,
+        ),
         reverse: true,
         piece: piece,
-        direction: widget.direction,
+        direction: Alignment.center,
         animationDuration: widget.animationDuration,
       );
     }

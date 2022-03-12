@@ -104,7 +104,7 @@ class _Animations {
         );
 
   late final Tween<double> _fadeTween =
-      reverse ? Tween(begin: 0.5, end: 1.0) : Tween(begin: 1.0, end: 0.0);
+      reverse ? Tween(begin: 0, end: 1.0) : Tween(begin: 1.0, end: 0.0);
 
   late final Tween<double> _rotationTween = reverse
       ? Tween(begin: (piece.alignment.x + piece.alignment.y) / 25, end: 0.0)

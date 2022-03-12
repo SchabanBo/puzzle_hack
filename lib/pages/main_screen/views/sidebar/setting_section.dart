@@ -92,6 +92,16 @@ class _GlassSettings extends GetView<MainController> {
                     value: value.value,
                     onChanged: (v) {
                       value.value = v ?? true;
+                      controller.isSlidable = v ?? true;
+                    },
+                    title: const Text('Slidable Glass'),
+                  ),
+              controller.isSlidable.obs),
+          ObxValue<RxBool>(
+              (value) => CheckboxListTile(
+                    value: value.value,
+                    onChanged: (v) {
+                      value.value = v ?? true;
                       controller.enableLowPerformanceMode = v ?? true;
                     },
                     title: const Text('Low Performance Mode'),

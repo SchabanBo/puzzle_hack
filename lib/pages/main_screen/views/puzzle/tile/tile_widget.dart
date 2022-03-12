@@ -39,7 +39,6 @@ class TileWidget extends StatelessWidget {
       case TileState.imploding:
         return ImplodeBox(
           controller.currentValue.value,
-          puzzleController.getDirection(controller),
           mainController.animationDuration,
           () => controller.state(TileState.readyToExplode),
         );
