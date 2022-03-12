@@ -86,14 +86,13 @@ class _ExplodeBoxState extends State<ExplodeBox> {
     return LayoutBuilder(builder: ((context, constraints) {
       final glassChild = glass(canAnimate: false);
       if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
-        return ExplodablePiece(
-          child: child,
-          piece: GlassPiece(
+        return getPiece(
+          GlassPiece(
             const Line(Offset.zero, Offset.zero),
             const Line(Offset.zero, Offset.zero),
             Alignment(random.nextInt(3) - 1, random.nextInt(3) - 1),
           ),
-          animationDuration: widget.animationDuration,
+          glassChild,
         );
       }
       if (breakingPoint == Offset.zero) {

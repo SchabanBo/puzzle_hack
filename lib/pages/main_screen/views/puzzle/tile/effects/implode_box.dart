@@ -62,16 +62,13 @@ class _ImplodeBoxState extends State<ImplodeBox> {
 
     return LayoutBuilder(builder: ((context, constraints) {
       if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
-        return ExplodablePiece(
-          child: glass,
-          reverse: true,
-          piece: GlassPiece(
-            const Line(Offset.zero, Offset.zero),
-            const Line(Offset.zero, Offset.zero),
-            Alignment(random.nextInt(3) - 1, random.nextInt(3) - 1),
-          ),
-          animationDuration: widget.animationDuration,
-        );
+        return getPiece(
+            GlassPiece(
+              const Line(Offset.zero, Offset.zero),
+              const Line(Offset.zero, Offset.zero),
+              Alignment(random.nextInt(3) - 1, random.nextInt(3) - 1),
+            ),
+            glass);
       }
 
       final lines = BreakingLineGenerator(
