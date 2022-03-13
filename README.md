@@ -3,6 +3,8 @@
 - [Flutter Hack Challenge](#flutter-hack-challenge)
   - [Online Demo](#online-demo)
   - [Tile Animation](#tile-animation)
+    - [Slide Animation](#slide-animation)
+    - [Explode-implode animation](#explode-implode-animation)
     - [Notes](#notes)
   - [Background Animation](#background-animation)
     - [Simple Background](#simple-background)
@@ -15,7 +17,15 @@
 
 ## Tile Animation
 
-The main animation for the tiles moving in the puzzle is Explode-implode animation, where the tile will break at the point where the user clicks (or taps). And from this point multiple breaking lines for this tile will be generated (The number of the lines is adjustable in the settings) and then the tile will be converted to many pieces, and they will preform an explosion animation. And after the explosion is finished the a number of pieces will be generated and perfume an imploded animation to shape at the end the new tile in the new position (The explosion and implode animation duration is adjustable in the settings).
+When clicking the tile, the tile will break at the point where the user clicks (or taps). And from this point multiple breaking lines for this tile will be generated (The number of the lines is adjustable in the settings) and then the tile will be converted to many pieces. and then there are tow types of animation ( you can choose the type from the settings)
+
+### Slide Animation
+
+here the pieces will just slide to the new position and shape the new tile.
+
+### Explode-implode animation
+
+here the pieces will preform an explosion animation. And after the explosion is finished a number of pieces will be generated and perfume an imploded animation to shape at the end the new tile in the new position (The explosion and implode animation duration is adjustable in the settings).
 
 ![Tile Animation](./Screenshots/Explode.PNG)
 
