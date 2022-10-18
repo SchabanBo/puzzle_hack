@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:reactable/reactable.dart';
 
+import '../../../../../helpers/locator.dart';
 import '../../../controllers/main_controller.dart';
 import '../../../controllers/puzzle_controller.dart';
 import '../../../controllers/tile_controller.dart';
@@ -10,12 +11,14 @@ import 'fading_tile.dart';
 
 class TileWidget extends StatelessWidget {
   final TileController controller;
-  final PuzzleController puzzleController = Get.find();
-  final MainController mainController = Get.find();
+  final PuzzleController puzzleController = locator();
+  final MainController mainController = locator();
   TileWidget(this.controller, {Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Obx(() => _build(context));
+  Widget build(BuildContext context) => Scope(
+        builder: (_) => _build(context),
+      );
 
   Widget _build(BuildContext context) {
     FocusScope.of(context).requestFocus(puzzleController.focusNode);

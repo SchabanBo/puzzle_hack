@@ -1,30 +1,32 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:get_it/get_it.dart';
+import 'package:reactable/reactable.dart';
 
+import '../../../helpers/locator.dart';
 import '../../../helpers/puzzle_generator.dart';
 import '../../../models/models.dart';
 import 'score_controller.dart';
 import 'tile_controller.dart';
 
-class PuzzleController extends GetxController {
-  final tiles = RxList<TileController>();
+class PuzzleController extends Disposable {
+  final tiles = ReactableList<TileController>([]);
   final focusNode = FocusNode();
   int puzzleSize = 4;
   bool _isUpdatingSize = false;
-  final _scoreController = Get.find<ScoreController>();
+  final _scoreController = locator<ScoreController>();
   bool isMoving = false;
-  @override
-  void onInit() {
-    super.onInit();
+
+  PuzzleController() {
     Future.delayed(const Duration(milliseconds: 500), shuffle);
   }
 
   @override
-  void onClose() {
+  FutureOr onDispose() {
     focusNode.dispose();
-    super.onClose();
   }
 
   /// --------------------------------------------------------------------------
@@ -35,6 +37,9 @@ class PuzzleController extends GetxController {
     if (_isUpdatingSize) return;
     _isUpdatingSize = true;
     await _updateTilesState(TileState.onEnd);
+    for (var element in tiles) {
+      element.onDispose();
+    }
     tiles.clear();
     puzzleSize = size;
     tiles.addAll(
@@ -78,7 +83,7 @@ class PuzzleController extends GetxController {
   }
 
   void shuffle() {
-    final score = Get.find<ScoreController>();
+    final score = locator<ScoreController>();
     score.time(0);
     score.moves(0);
     updateSize(puzzleSize);

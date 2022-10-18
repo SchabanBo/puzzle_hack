@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import '../../../../../../helpers/locator.dart';
 import '../../../../../../helpers/random.dart';
 import '../../../../../../models/glass_piece.dart';
 import '../../../../controllers/main_controller.dart';
@@ -26,7 +26,7 @@ class ImplodeBox extends StatefulWidget {
 
 class _ImplodeBoxState extends State<ImplodeBox> {
   bool _isAnimating = true;
-  final MainController _mainController = Get.find();
+  final MainController _mainController = locator();
 
   late final glass = GlassWidget(
     child: CustomPaint(
@@ -61,7 +61,7 @@ class _ImplodeBoxState extends State<ImplodeBox> {
     if (!_isAnimating) return glass;
 
     return LayoutBuilder(builder: ((context, constraints) {
-      if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
+      if (isMobile && locator<MainController>().enableLowPerformanceMode) {
         return SlidablePiece(
           piece: GlassPiece(
             const Line(Offset.zero, Offset.zero),

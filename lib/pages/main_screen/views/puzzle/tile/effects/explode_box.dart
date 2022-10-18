@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import '../../../../../../helpers/locator.dart';
 import '../../../../../../helpers/random.dart';
 import '../../../../../../models/glass_piece.dart';
 import '../../../../controllers/main_controller.dart';
@@ -34,7 +34,7 @@ class ExplodeBox extends StatefulWidget {
 }
 
 class _ExplodeBoxState extends State<ExplodeBox> {
-  final MainController _mainController = Get.find();
+  final MainController _mainController = locator();
   Offset? breakingPoint;
   @override
   void initState() {
@@ -85,7 +85,7 @@ class _ExplodeBoxState extends State<ExplodeBox> {
 
     return LayoutBuilder(builder: ((context, constraints) {
       final glassChild = glass(canAnimate: false);
-      if (isMobile && Get.find<MainController>().enableLowPerformanceMode) {
+      if (isMobile && locator<MainController>().enableLowPerformanceMode) {
         return SlidablePiece(
           piece: GlassPiece(
             const Line(Offset.zero, Offset.zero),

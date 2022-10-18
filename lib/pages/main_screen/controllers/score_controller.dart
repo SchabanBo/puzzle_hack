@@ -1,15 +1,13 @@
 import 'dart:async';
 
-import 'package:get/get.dart';
+import 'package:reactable/reactable.dart';
 
-class ScoreController extends GetxController {
-  final moves = 0.obs;
-  final rightTiles = 0.obs;
-  final time = 0.obs;
+class ScoreController {
+  final moves = 0.asReactable;
+  final rightTiles = 0.asReactable;
+  final time = 0.asReactable;
 
-  @override
-  void onInit() {
+  ScoreController() {
     Timer.periodic(const Duration(seconds: 1), (_) => time.value++);
-    super.onInit();
   }
 }

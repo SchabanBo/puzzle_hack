@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import '../../../../../../helpers/locator.dart';
 import '../../../../../../helpers/random.dart';
 import '../../../../../../models/glass_piece.dart';
 import '../../../../controllers/main_controller.dart';
@@ -12,7 +12,7 @@ final isMobile = defaultTargetPlatform == TargetPlatform.iOS ||
 class BreakingLineGenerator {
   static const breakSpace = 1;
   final Offset breakPoint;
-  final MainController mainController = Get.find();
+  final MainController mainController = locator();
   final Size size;
   final _lines = <Line>[];
 
@@ -94,7 +94,7 @@ class GlassPieceClipper extends CustomClipper<Path> {
 
 class NumberPainter extends CustomPainter {
   final int value;
-  final controller = Get.find<MainController>();
+  final controller = locator<MainController>();
   NumberPainter(this.value);
 
   @override

@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import '../../../../helpers/locator.dart';
 import '../../../../helpers/random.dart';
 import '../../controllers/main_controller.dart';
 import '../puzzle/tile/effects/helpers.dart';
@@ -33,7 +33,7 @@ class _ShadowsBackgroundState extends State<ShadowsBackground> {
     } catch (e) {
       // ignore
     }
-    Timer(painter.controller.boxSpeed.milliseconds, _next);
+    Timer(Duration(milliseconds: painter.controller.boxSpeed), _next);
   }
 
   @override
@@ -90,7 +90,7 @@ void setLight(Offset light) {
 
 class _BoxBackgroundPainter extends CustomPainter {
   final List<_Box> _boxes = <_Box>[];
-  final MainController controller = Get.find();
+  final MainController controller = locator();
   final _shadowRect = const RadialGradient(
     center: Alignment.center,
     colors: [

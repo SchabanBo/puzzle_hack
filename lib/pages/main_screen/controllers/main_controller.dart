@@ -1,15 +1,12 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get/get.dart';
+import 'package:reactable/reactable.dart';
 
-import 'puzzle_controller.dart';
-import 'score_controller.dart';
-
-class MainController extends GetxController {
-  final background = BackgroundType.simple.obs;
+class MainController {
+  final background = BackgroundType.simple.asReactable;
 
   /// Simple animation settings
-  final backgroundAnimationDuration = 5000.obs;
+  final backgroundAnimationDuration = 5000.asReactable;
 
   // Tile settings
   bool isSlidable = true;
@@ -34,16 +31,12 @@ class MainController extends GetxController {
   int rotationVerticalSpeed = 5;
   int startFadingSpeed = 1;
 
-  @override
-  void onInit() {
-    Get.lazyPut(() => PuzzleController());
-    Get.lazyPut(() => ScoreController());
-    super.onInit();
+  MainController() {
     if (kIsWeb) {
-      background.listen((p0) {
-        debugPrint('Background changed to $p0');
+      background.addListener(() {
+        debugPrint('Background changed to ${background.read}');
         FirebaseAnalytics.instance.logEvent(
-          name: 'background: ${p0.toString()}',
+          name: 'background: ${background.read.toString()}',
         );
       });
     }

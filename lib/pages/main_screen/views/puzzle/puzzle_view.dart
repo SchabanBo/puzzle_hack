@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
+import 'package:reactable/reactable.dart';
 
 import '../../../../helpers/extensions/list_extensions.dart';
+import '../../../../helpers/locator.dart';
 import '../../controllers/puzzle_controller.dart';
 import '../../controllers/tile_controller.dart';
 import 'tile/tile_widget.dart';
 
-class PuzzleView extends GetView<PuzzleController> {
+class PuzzleView extends StatelessWidget {
   const PuzzleView({Key? key}) : super(key: key);
 
   @override
@@ -17,11 +18,12 @@ class PuzzleView extends GetView<PuzzleController> {
         padding: const EdgeInsets.all(16.0),
         child: AspectRatio(
           aspectRatio: 1,
-          child: Obx(() => builder(context)),
+          child: Scope(builder: (_) => builder(context)),
         ),
       ));
 
   Widget builder(BuildContext context) {
+    final controller = locator<PuzzleController>();
     if (controller.tiles.isEmpty) {
       return const SizedBox.shrink();
     }

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:reactable/reactable.dart';
 
+import '../../../../helpers/locator.dart';
 import '../../controllers/main_controller.dart';
 
-class BackgroundSection extends GetResponsiveView<MainController> {
-  BackgroundSection({Key? key}) : super(key: key);
+class BackgroundSection extends StatelessWidget {
+  const BackgroundSection({Key? key}) : super(key: key);
   final _style = const TextStyle(fontSize: 24, color: Colors.white);
   @override
-  Widget? builder() {
-    return Obx(
-      () => Column(
+  Widget build(BuildContext context) {
+    final controller = locator<MainController>();
+    return Scope(
+      builder: (_) => Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: BackgroundType.values.map((e) {

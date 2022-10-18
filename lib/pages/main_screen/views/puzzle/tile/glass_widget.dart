@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:reactable/reactable.dart';
 
+import '../../../../../helpers/locator.dart';
 import '../../../../../helpers/random.dart';
 import '../../../controllers/main_controller.dart';
 
@@ -13,22 +14,24 @@ class GlassWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (canAnimate) {
-      return Obx(() => AnimatedContainer(
-            duration: Duration(milliseconds: random.nextInt(1000) + 600),
-            curve: Curves.slowMiddle,
-            margin: const EdgeInsets.all(8),
-            decoration: _glassDecoration(Get.find<MainController>().background),
-            child: child,
-          ));
+      return Scope(
+        builder: (_) => AnimatedContainer(
+          duration: Duration(milliseconds: random.nextInt(1000) + 600),
+          curve: Curves.slowMiddle,
+          margin: const EdgeInsets.all(8),
+          decoration: _glassDecoration(locator<MainController>().background),
+          child: child,
+        ),
+      );
     }
 
     return Container(
-      decoration: _glassDecoration(Get.find<MainController>().background),
+      decoration: _glassDecoration(locator<MainController>().background),
       child: child,
     );
   }
 
-  BoxDecoration _glassDecoration(Rx<BackgroundType> background) {
+  BoxDecoration _glassDecoration(Reactable<BackgroundType> background) {
     switch (background.value) {
       case BackgroundType.shadows:
         return BoxDecoration(

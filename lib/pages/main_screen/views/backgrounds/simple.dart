@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:reactable/reactable.dart';
 
+import '../../../../helpers/locator.dart';
 import '../../../../helpers/random.dart';
 import '../../controllers/main_controller.dart';
 
@@ -22,28 +23,30 @@ class _SimpleBackgroundState extends State<SimpleBackground> {
   Alignment alignment = Alignment.centerRight;
   Alignment endAlignment = Alignment.centerLeft;
   final animationDuration =
-      Get.find<MainController>().backgroundAnimationDuration;
+      locator<MainController>().backgroundAnimationDuration;
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _update();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => AnimatedContainer(
-          duration: Duration(milliseconds: animationDuration.value),
-          curve: Curves.decelerate,
-          onEnd: _update,
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-            colors: appColors,
-            begin: endAlignment,
-            end: alignment,
-          )),
-        ));
+    return Scope(
+      builder: (_) => AnimatedContainer(
+        duration: Duration(milliseconds: animationDuration.value),
+        curve: Curves.decelerate,
+        onEnd: _update,
+        decoration: BoxDecoration(
+            gradient: LinearGradient(
+          colors: appColors,
+          begin: endAlignment,
+          end: alignment,
+        )),
+      ),
+    );
   }
 
   void _update() {

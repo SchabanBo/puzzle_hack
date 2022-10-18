@@ -3,8 +3,8 @@ import 'dart:math';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
+import '../../../../helpers/locator.dart';
 import '../../../../helpers/random.dart';
 import '../../controllers/main_controller.dart';
 
@@ -53,7 +53,7 @@ class _GalaxyBackgroundState extends State<GalaxyBackground> {
   late Timer _timer;
   late Timer _timer2;
   final painter = _GalaxyPainter();
-  final _controller = Get.find<MainController>();
+  final _controller = locator<MainController>();
   bool _canEdit = false;
   @override
   void initState() {
@@ -185,7 +185,7 @@ class _Planet {
   double cx, cy, x = 0, y = 0, z = random.nextDouble() * 2 + 1;
   double speed = pi / 720, step = 0, radius;
 
-  final _controller = Get.find<MainController>();
+  final _controller = locator<MainController>();
   double scale = random.nextBool() ? 1 : random.nextDouble() + .5;
   double scale1 = random.nextBool() ? 1 : random.nextDouble() + .5;
   _Planet({
@@ -214,7 +214,7 @@ class _Planet {
 }
 
 class ScaleChanger {
-  final _controller = Get.find<MainController>();
+  final _controller = locator<MainController>();
   double scale = .5;
 
   double direction = -1;
@@ -232,7 +232,7 @@ class ScaleChanger {
 class _Star {
   final double x, y;
   final double radius = random.nextDouble() * 10;
-  final _controller = Get.find<MainController>();
+  final _controller = locator<MainController>();
   Color color;
   bool isUp = true;
   _Star(this.x, this.y)
