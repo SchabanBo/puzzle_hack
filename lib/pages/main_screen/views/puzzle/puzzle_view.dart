@@ -13,14 +13,12 @@ class PuzzleView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Align(
-      alignment: Alignment.center,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        alignment: Alignment.center,
         child: AspectRatio(
           aspectRatio: 1,
           child: Scope(builder: (_) => builder(context)),
         ),
-      ));
+      );
 
   Widget builder(BuildContext context) {
     final controller = locator<PuzzleController>();

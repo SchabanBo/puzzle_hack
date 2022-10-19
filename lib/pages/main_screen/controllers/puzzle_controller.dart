@@ -9,6 +9,7 @@ import 'package:reactable/reactable.dart';
 import '../../../helpers/locator.dart';
 import '../../../helpers/puzzle_generator.dart';
 import '../../../models/models.dart';
+import 'main_controller.dart';
 import 'score_controller.dart';
 import 'tile_controller.dart';
 
@@ -146,8 +147,9 @@ class PuzzleController extends Disposable {
   ///---------------------------------------------------------------------------
 
   void onKey(KeyEvent event) {
-    if (kDebugMode) print('Key: ${event.logicalKey.debugName}');
     if (isMoving) return;
+    if (kDebugMode) print('Key: ${event.logicalKey.debugName}');
+    isMoving = true;
     final whiteSpaceTile = getWhitespaceTile();
     var position = whiteSpaceTile.position;
     if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
@@ -161,11 +163,14 @@ class PuzzleController extends Disposable {
     } else {
       return;
     }
-    isMoving = true;
     if (!_validPosition(position)) return;
     final targetTile = tiles.singleWhere((tile) => tile.position == position);
     targetTile.explode.explode();
-    isMoving = false;
+    Future.delayed(
+        Duration(milliseconds: locator<MainController>().animationDuration),
+        () {
+      isMoving = false;
+    });
   }
 
   bool _validPosition(Position position) =>

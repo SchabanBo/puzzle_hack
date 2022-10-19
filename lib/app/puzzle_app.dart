@@ -11,9 +11,11 @@ class PuzzleApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    locator.registerSingleton(MainController());
-    locator.registerSingleton(ScoreController());
-    locator.registerSingleton(PuzzleController());
+    if (!locator.isRegistered<MainController>()) {
+      locator.registerSingleton(MainController());
+      locator.registerSingleton(ScoreController());
+      locator.registerSingleton(PuzzleController());
+    }
     return const MaterialApp(
       home: MainScreen(),
     );

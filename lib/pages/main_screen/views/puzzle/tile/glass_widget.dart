@@ -18,7 +18,7 @@ class GlassWidget extends StatelessWidget {
         builder: (_) => AnimatedContainer(
           duration: Duration(milliseconds: random.nextInt(1000) + 600),
           curve: Curves.slowMiddle,
-          margin: const EdgeInsets.all(8),
+          margin: const EdgeInsets.all(4),
           decoration: _glassDecoration(locator<MainController>().background),
           child: child,
         ),

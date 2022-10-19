@@ -29,7 +29,7 @@ class MainScreen extends StatelessWidget {
       body: Stack(
         children: const [
           RepaintBoundary(child: Background()),
-          MainView(),
+          SafeArea(child: MainView()),
         ],
       ),
     );
@@ -48,21 +48,54 @@ class MainView extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Flex(
             direction: mainAxis(width),
-            children: [
-              ConstrainedBox(
-                constraints: BoxConstraints(
-                  maxWidth:
-                      crossAxis(width) == Axis.vertical ? 250 : double.infinity,
-                  maxHeight:
-                      mainAxis(width) == Axis.vertical ? 100 : double.infinity,
-                ),
-                child: SidebarView(crossAxis(width)),
-              ),
-              const Expanded(child: PuzzleView()),
+            children: const [
+              AnimatedSidebar(),
+              Expanded(child: PuzzleView()),
             ],
           ),
         );
       },
+    );
+  }
+}
+
+class AnimatedSidebar extends StatefulWidget {
+  const AnimatedSidebar({Key? key}) : super(key: key);
+
+  @override
+  State<AnimatedSidebar> createState() => _AnimatedSidebarState();
+}
+
+class _AnimatedSidebarState extends State<AnimatedSidebar> {
+  bool show = false;
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    if (!show) {
+      Future.delayed(const Duration(seconds: 2), () {
+        setState(() {
+          show = true;
+        });
+      });
+    }
+    final offset = mainAxis(width) == Axis.vertical
+        ? const Offset(0, -1)
+        : const Offset(-1, 0);
+    return SizedBox(
+      width: crossAxis(width) == Axis.vertical ? 260 : double.infinity,
+      height: mainAxis(width) == Axis.vertical ? 150 : double.infinity,
+      child: AnimatedSwitcher(
+        duration: const Duration(seconds: 1),
+        switchInCurve: Curves.elasticOut,
+        transitionBuilder: (child, animation) {
+          return SlideTransition(
+            position: Tween<Offset>(begin: offset, end: Offset.zero)
+                .animate(animation),
+            child: child,
+          );
+        },
+        child: show ? SidebarView(crossAxis(width)) : const SizedBox.shrink(),
+      ),
     );
   }
 }

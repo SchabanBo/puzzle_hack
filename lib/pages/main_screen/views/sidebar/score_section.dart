@@ -15,12 +15,8 @@ class ScoreSection extends StatelessWidget {
       final screen = MediaQuery.of(c).size;
       return Flex(
         direction: crossAxis(screen.width),
-        mainAxisAlignment: crossAxis(screen.width) == Axis.vertical
-            ? MainAxisAlignment.end
-            : MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          sizedBox,
           Scope(
             builder: (_) => Text('Moves: ${controller.moves}', style: style),
           ),

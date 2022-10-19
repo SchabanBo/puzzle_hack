@@ -13,40 +13,37 @@ class SidebarView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: axis == Axis.vertical
-          ? CrossAxisAlignment.start
-          : CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: axis == Axis.horizontal
               ? MainAxisAlignment.center
               : MainAxisAlignment.start,
           children: [
-            axis == Axis.horizontal
-                ? settingsButton(context)
-                : const SizedBox.shrink(),
-            SizedBox(width: axis == Axis.horizontal ? 16 : 0),
             const Text(
-              'Puzzle Challenge',
+              'Huzzly',
               style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Colors.white),
             ),
+            if (axis == Axis.horizontal) ...[
+              const Spacer(),
+              settingsButton(context),
+            ]
           ],
         ),
         if (axis == Axis.vertical)
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 4),
             child: Text(
-              'Move with arrows or Space for settings',
+              r'''Winner of Flutter Puzzle Hack 
+Move with arrows or Space for settings''',
               style: TextStyle(color: Colors.white, fontSize: 12),
             ),
           ),
         if (axis == Axis.vertical) settingsButton(context),
-        axis == Axis.vertical
-            ? const Expanded(child: BackgroundSection())
-            : const SizedBox(height: 16),
+        Expanded(child: BackgroundSection(axis)),
         const ScoreSection(),
       ],
     );

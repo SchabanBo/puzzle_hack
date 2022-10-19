@@ -84,7 +84,7 @@ Those properties are adjustable in the settings:
 
 ## Used packages
 
-- [Getx](https://pub.dev/packages/get) for state management.
+- [Reactable](https://pub.dev/packages/reactable) for state management.
 - [url_launcher](https://pub.dev/packages/url_launcher)
 - [firebase_analytics](https://pub.dev/packages/firebase_analytics)
 

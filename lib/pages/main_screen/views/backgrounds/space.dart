@@ -152,6 +152,7 @@ class _GalaxyPainter extends CustomPainter {
   }
 
   void addPlanet(int _maxCount) {
+    if (size == null) return;
     final r = size!.shortestSide * ((_planets.length) / _maxCount);
 
     for (var i = 1; i < 4; i++) {

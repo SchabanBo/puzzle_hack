@@ -18,18 +18,8 @@ class AppLoader extends StatelessWidget {
   }
 }
 
-class _SplashScreen extends StatefulWidget {
+class _SplashScreen extends StatelessWidget {
   const _SplashScreen({Key? key}) : super(key: key);
-
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<_SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

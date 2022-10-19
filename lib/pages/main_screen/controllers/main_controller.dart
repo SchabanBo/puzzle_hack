@@ -14,7 +14,7 @@ class MainController {
   /// Glass settings
   int maxGlassPiece = 15;
   int animationDuration = 1000;
-  bool enableLowPerformanceMode = true;
+  bool enableLowPerformanceMode = false;
   bool useRomanNumerals = true;
 
   /// Shadows animation settings

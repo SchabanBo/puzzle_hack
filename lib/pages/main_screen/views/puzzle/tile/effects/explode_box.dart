@@ -43,7 +43,7 @@ class _ExplodeBoxState extends State<ExplodeBox> {
   }
 
   void explode() {
-    if (isWorking || !widget.canBreak()) return;
+    if (isWorking || !widget.canBreak() || !mounted) return;
     setState(() {
       breakingPoint = Offset.zero;
     });
