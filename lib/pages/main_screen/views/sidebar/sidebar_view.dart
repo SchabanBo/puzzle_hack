@@ -21,7 +21,7 @@ class SidebarView extends StatelessWidget {
               : MainAxisAlignment.start,
           children: [
             const Text(
-              'Huzzly',
+              'Rutzzle',
               style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
@@ -37,8 +37,7 @@ class SidebarView extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.symmetric(horizontal: 4),
             child: Text(
-              r'''Winner of Flutter Puzzle Hack 
-Move with arrows or Space for settings''',
+              'Move with arrows or space for settings',
               style: TextStyle(color: Colors.white, fontSize: 12),
             ),
           ),
