@@ -7,13 +7,9 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
-  firebase_analytics: ^9.1.2
-  firebase_core: ^1.13.1
   flutter:
     sdk: flutter
-  get_it: ^7.2.0
   reactable: ^0.1.4
-  url_launcher: ^6.0.20
   
 dev_dependencies:
   flutter_test:
