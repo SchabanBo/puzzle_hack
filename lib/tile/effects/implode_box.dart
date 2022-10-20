@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../../models/glass_piece.dart';
+import '../../main.dart';
 import '../glass_widget.dart';
 import 'explodable_piece.dart';
 import 'helpers.dart';
@@ -56,13 +57,21 @@ class _ImplodeBoxState extends State<ImplodeBox> {
     if (!_isAnimating) return glass;
 
     return LayoutBuilder(builder: ((context, constraints) {
-      final lines = BreakingLineGenerator(
-        Offset(constraints.maxWidth / 2, constraints.maxHeight / 2),
-        Size(constraints.maxWidth, constraints.maxHeight),
-      );
+      List<GlassPiece> _getPieces() {
+        if (mainController.lastPieces.isNotEmpty) {
+          final pieces = mainController.lastPieces;
+          mainController.lastPieces = [];
+          return pieces;
+        }
+        final lines = BreakingLineGenerator(
+          Offset(constraints.maxWidth / 2, constraints.maxHeight / 2),
+          Size(constraints.maxWidth, constraints.maxHeight),
+        );
+        return lines.toPieces();
+      }
 
       return Stack(
-        children: lines.toPieces().map((e) => getPiece(e, glass)).toList(),
+        children: _getPieces().map((e) => getPiece(e, glass)).toList(),
       );
     }));
   }

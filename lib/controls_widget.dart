@@ -10,11 +10,11 @@ class Controls extends ScopedView {
   @override
   Widget builder(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(8),
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(width: 8),
           Row(
             children: [
               const Text('State'),
@@ -73,7 +73,6 @@ class Controls extends ScopedView {
                 ),
             ],
           ),
-          const SizedBox(width: 8),
         ],
       ),
     );
