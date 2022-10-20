@@ -74,14 +74,22 @@ class _ImplodeBoxState extends State<ImplodeBox> {
           animationDuration: widget.animationDuration,
         );
       }
-
-      final lines = BreakingLineGenerator(
-        Offset(constraints.maxWidth / 2, constraints.maxHeight / 2),
-        Size(constraints.maxWidth, constraints.maxHeight),
-      );
+      final mainController = locator<MainController>();
+      List<GlassPiece> _getPieces() {
+        if (mainController.lastPieces.isNotEmpty) {
+          final pieces = mainController.lastPieces;
+          mainController.lastPieces = [];
+          return pieces;
+        }
+        final lines = BreakingLineGenerator(
+          Offset(constraints.maxWidth / 2, constraints.maxHeight / 2),
+          Size(constraints.maxWidth, constraints.maxHeight),
+        );
+        return lines.toPieces();
+      }
 
       return Stack(
-        children: lines.toPieces().map((e) => getPiece(e, glass)).toList(),
+        children: _getPieces().map((e) => getPiece(e, glass)).toList(),
       );
     }));
   }

@@ -2,8 +2,11 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:reactable/reactable.dart';
 
+import '../../../models/glass_piece.dart';
+
 class MainController {
   final background = BackgroundType.simple.asReactable;
+  List<GlassPiece> lastPieces = [];
 
   /// Simple animation settings
   final backgroundAnimationDuration = 5000.asReactable;

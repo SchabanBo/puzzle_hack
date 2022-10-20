@@ -105,9 +105,10 @@ class _ExplodeBoxState extends State<ExplodeBox> {
         breakingPoint!,
         Size(constraints.maxWidth, constraints.maxHeight),
       );
+      final pieces = lines.toPieces();
+      locator<MainController>().lastPieces = pieces;
       return Stack(
-          children:
-              lines.toPieces().map((e) => getPiece(e, glassChild)).toList());
+          children: pieces.map((e) => getPiece(e, glassChild)).toList());
     }));
   }
 
