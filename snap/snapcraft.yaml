@@ -1,0 +1,32 @@
+name: rutzzle
+version: 0.1.0
+summary: A puzzle game made with flutter
+description: A puzzle game with beautiful animation
+
+confinement: strict
+base: core18
+grade: stable
+icon: snap/gui//icon.png
+
+slots:
+  dbus-rutzzle:
+    interface: dbus
+    bus: session
+    name: org.bar.rutzzle
+    
+apps:
+  rutzzle:
+    command: puzzle_hack
+    extensions: [flutter-master]
+    plugs:
+      - network
+      - desktop
+    slots:
+      - dbus-rutzzle
+
+parts:
+  rutzzle:
+    source: .
+    plugin: flutter
+    flutter-target: lib/main.dart
+
