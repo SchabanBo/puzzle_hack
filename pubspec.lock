@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.16.0"
+  console:
+    dependency: transitive
+    description:
+      name: console
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.1.0"
   crypto:
     dependency: transitive
     description:
@@ -212,6 +219,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
+  msix:
+    dependency: "direct dev"
+    description:
+      name: msix
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.6.6"
+  package_config:
+    dependency: transitive
+    description:
+      name: package_config
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   path:
     dependency: transitive
     description:
@@ -230,6 +251,13 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.2"
+  pub_semver:
+    dependency: transitive
+    description:
+      name: pub_semver
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"

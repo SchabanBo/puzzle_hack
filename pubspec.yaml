@@ -14,12 +14,14 @@ dependencies:
   get_it: ^7.2.0
   reactable: ^0.1.4
   url_launcher: ^6.0.20
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
   change_app_package_name: ^1.1.0 #de.develappers.rutzzle
   flutter_launcher_icons: "^0.10.0" 
+  msix: ^3.6.6 # Windows app packaging
 
 flutter:
   uses-material-design: true  
@@ -38,3 +40,9 @@ flutter_icons:
     generate: true
   macos:
     generate: true
+
+msix_config:
+  display_name: Rutzzle
+  publisher_display_name: Develappers GmbH
+  logo_path: assets/icon.png
+  output_name: Rutzzle
